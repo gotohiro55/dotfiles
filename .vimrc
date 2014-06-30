@@ -1,6 +1,3 @@
-" Copyright (C) 2011 KaoriYa/MURAOKA Taro
-"
-"
 "#####表示設定#####
 set title "編集中のファイル名を表示
 syntax on "コードの色分け
