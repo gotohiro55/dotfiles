@@ -31,28 +31,30 @@ set number
 " ファイル名補完の強化
 set wildmode=list:longest
 
-
-set nocompatible               " be iMproved
-filetype off
+set nocompatible
+filetype plugin indent off
 
 if has('vim_starting')
-set runtimepath+=~/.vim/bundle/neobundle.vim
-call neobundle#rc(expand('~/.vim/bundle/'))
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
-" originalrepos on github
-" NeoBundle 'Shougo/neobundle.vim'
-" NeoBundle 'Shougo/vimproc'
-" NeoBundle 'VimClojure'
-" NeoBundle 'Shougo/vimshell'
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+"NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
 " NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/neocomplcache'
-" NeoBundle 'Shougo/neosnippet'
-" NeoBundle 'jpalardy/vim-slime'
-" NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+" NeoBundle 'Shougo/vimproc'
+" NeoBundle 'The-NERD-tree'
+" NeoBundle 'The-NERD-Commenter'
+" NeoBundle 'Gist.vim'
 NeoBundle 'vim-ruby/vim-ruby'
 
-filetype plugin indent on     " required!
+call neobundle#end()
+
+filetype plugin indent on
 filetype indent on
 syntax on
 
