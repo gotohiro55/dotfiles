@@ -1,15 +1,19 @@
 "#####表示設定#####
+set encoding=utf-8
+colorscheme darkblue
+
 set title "編集中のファイル名を表示
 syntax on "コードの色分け
 set tabstop=2 "インデントをスペース4つ分に設定
 set shiftwidth=2
 set smartindent "オートインデント
-set cursorline
-hi CursorLine   term=reverse cterm=none ctermbg=195
-set cursorcolumn
-hi CursorColumn term=reverse cterm=none ctermbg=195
+" set cursorline
+" hi clear CursorLine
+" set cursorcolumn
+" hi CursorColumn term=reverse cterm=none ctermbg=195
 
-set guifont=Ricty\ 13
+" set guifont=Ricty\ 12
+set guifont=Ricty:h12
 " "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
@@ -42,10 +46,10 @@ endif
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-"NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
-" NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite.vim'
 " NeoBundle 'Shougo/vimproc'
 " NeoBundle 'The-NERD-tree'
 " NeoBundle 'The-NERD-Commenter'
@@ -56,6 +60,11 @@ call neobundle#end()
 
 filetype plugin indent on
 filetype indent on
+
+" インストールのチェック
+NeoBundleCheck
+
+
 syntax on
 
 " 個別のタブの表示設定をします
