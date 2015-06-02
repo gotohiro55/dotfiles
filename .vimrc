@@ -30,6 +30,7 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 " NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'Gist.vim'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'mattn/emmet-vim'
 
 "--- colorscheme ---
 NeoBundle 'nanotech/jellybeans.vim'
