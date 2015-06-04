@@ -1,5 +1,15 @@
 set encoding=utf-8
+set fileformat=unix
+set fileformats=unix,dos
+set fileencoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
+set termencoding=
 
+if has('unix')
+  set guifont=Ricty\ 15
+elseif has('win32')
+  set guifont=Ricty:h11
+endif
 
 "---------------------------
 " Start Neobundle Settings.
@@ -15,17 +25,29 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw 64',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite.vim'
 let g:unite_enable_start_insert=0
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+nnoremap [unite]    <Nop>
+nmap     <Space>u [unite]
+nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
+nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
+" nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
+" nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
+" nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
 
-" NeoBundle 'Shougo/vimproc'
 " NeoBundle 'The-NERD-tree'
 " NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'Gist.vim'
@@ -88,18 +110,20 @@ set smartindent "オートインデント
 " set cursorcolumn
 " hi CursorColumn term=reverse cterm=none ctermbg=195
 
-" set guifont=Ricty\ 12
-set guifont=Ricty:h11
 " "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検索時に最後まで行ったら最初に戻る
-""クリップボードをWindowsと連携する
+set hlsearch "検索結果のハイライト
+" EscEsc でハイライトを消す
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+"クリップボードをWindowsと連携する
 set clipboard+=unnamed
 " set guioptions+=a
 " set clipboard+=autoselect
 "新しい行のインデントを現在行と同じにする
-set autoindent 
+"set autoindent 
 "タブの代わりに空白文字を指定する
 set expandtab
 set number
@@ -113,6 +137,44 @@ set wildmode=list:longest
 
 set nocompatible
 filetype plugin indent off
+
+" ### キーバインド
+" # 括弧を入力した時の自動補完
+" http://d.hatena.ne.jp/spiritloose/20061113/1163401194
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+vnoremap { "zdi^V{<C-R>z}<ESC>
+vnoremap [ "zdi^V[<C-R>z]<ESC>
+vnoremap ( "zdi^V(<C-R>z)<ESC>
+vnoremap " "zdi^V"<C-R>z^V"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
+
+" カーソル位置の単語を置換する
+nnoremap  [Replace] <Nop>
+nmap      <Space>r  [Replace]
+nnoremap <expr> [Replace]c ':%s ;\<' . expand('<cword>') . '\>;'
+vnoremap <expr> [Replace]c ':s ;\<' . expand('<cword>') . '\>;'
+
+" ### タブ関連
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+for n in range(1, 9)
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+
+map [Tag]e :tabe 
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" tx タブを閉じる
+map <silent> [Tag]x :tabclose<CR>
+" tn 次のタブ
+map <silent> <Tab> :tabnext<CR>
+" tp 前のタブ
+map <silent> <S-Tab> :tabprevious<CR>
 
 " 個別のタブの表示設定をします
 function! GuiTabLabel()
@@ -146,28 +208,6 @@ function! GuiTabLabel()
   return l:label
 endfunction
 
-" ### キーバインド
-" # 括弧を入力した時の自動補完
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-
-" The prefix key.
-nnoremap    [Tag]   <Nop>
-nmap    t [Tag]
-" Tab jump
-for n in range(1, 9)
-  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
-endfor
-" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
-
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]x :tabclose<CR>
-" tx タブを閉じる
-map <silent> [Tag]n :tabnext<CR>
-" tn 次のタブ
-map <silent> [Tag]p :tabprevious<CR>
-" tp 前のタブ
+" guitablabel に上の関数を設定します
+" その表示の前に %N というところでタブ番号を表示させています
+set guitablabel=%N:\ %{GuiTabLabel()}
