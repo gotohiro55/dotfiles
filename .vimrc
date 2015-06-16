@@ -6,7 +6,9 @@ set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 set termencoding=
 
 if has('unix')
-  set guifont=Ricty\ 15
+  set guifont=Ricty\ 14
+  set guioptions-=T
+  set guioptions-=m
 elseif has('win32')
   set guifont=Ricty:h11
 endif
