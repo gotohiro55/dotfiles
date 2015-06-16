@@ -8,6 +8,6 @@
 !/.gitignore
 
 # 上記無視したくないディレクトリのなかで無視したいファイルを指定
-/.vim/.netrwhist
-/.vim/bundle
+#/.vim/.netrwhist
+#/.vim/bundle
 
