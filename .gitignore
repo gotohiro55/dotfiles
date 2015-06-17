@@ -6,8 +6,9 @@
 !/.vimrc
 !/.vim
 !/.gitignore
+!/.vim/bundle/neobundle.vim
 
 # 上記無視したくないディレクトリのなかで無視したいファイルを指定
-/.vim/.netrwhist
+#/.vim/.netrwhist
 /.vim/bundle
 
