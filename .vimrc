@@ -52,7 +52,9 @@ nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
 " NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'Gist.vim'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<c-e>'
 
 "--- colorscheme ---
 NeoBundle 'nanotech/jellybeans.vim'
@@ -78,6 +80,10 @@ syntax on
 colorscheme molokai
 "colorscheme badwolf
 
+" ツールバーを非表示にする
+set guioptions-=T
+" 自動的に開いたファイルのディレクトリに移動する
+set autochdir
 
 " ### Windowsのvimで挿入モードのIMEをデフォルトオフにする ###########
 set iminsert=0
@@ -146,10 +152,10 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
-vnoremap { "zdi^V{<C-R>z}<ESC>
-vnoremap [ "zdi^V[<C-R>z]<ESC>
-vnoremap ( "zdi^V(<C-R>z)<ESC>
-vnoremap " "zdi^V"<C-R>z^V"<ESC>
+vnoremap { "zdi{<C-R>z}<ESC>
+vnoremap [ "zdi[<C-R>z]<ESC>
+vnoremap ( "zdi(<C-R>z)<ESC>
+vnoremap " "zdi"<C-R>z"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
 " カーソル位置の単語を置換する
