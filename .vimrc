@@ -3,12 +3,14 @@ set fileformat=unix
 set fileformats=unix,dos
 set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
-set termencoding=
+"set termencoding=
+
+" ツールバーとメニューバーを非表示
+set guioptions-=T
+set guioptions-=m
 
 if has('unix')
   set guifont=Ricty\ 14
-  set guioptions-=T
-  set guioptions-=m
 elseif has('win32')
   set guifont=Ricty:h11
 endif
@@ -82,8 +84,6 @@ syntax on
 colorscheme molokai
 "colorscheme badwolf
 
-" ツールバーを非表示にする
-set guioptions-=T
 " 自動的に開いたファイルのディレクトリに移動する
 set autochdir
 
