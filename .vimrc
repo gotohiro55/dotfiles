@@ -9,6 +9,81 @@ set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 set guioptions-=T
 set guioptions-=m
 
+syntax on
+"colorscheme darkblue
+"colorscheme jellybeans
+colorscheme molokai
+"colorscheme badwolf
+
+" 自動的に開いたファイルのディレクトリに移動する
+set autochdir
+
+" ### Windowsのvimで挿入モードのIMEをデフォルトオフにする ###########
+set iminsert=0
+set imsearch=-1
+
+" listcharsで指定した特殊文字を表示する
+set list
+set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:¬
+
+"全角スペースをハイライト表示
+"function! ZenkakuSpace()
+"    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+"endfunction
+
+"if has('syntax')
+"    augroup ZenkakuSpace
+"        autocmd!
+"        autocmd ColorScheme       * call ZenkakuSpace()
+"        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+"    augroup END
+"    call ZenkakuSpace()
+"endif
+
+set title "編集中のファイル名を表示
+set tabstop=2 "インデントをスペース4つ分に設定
+set shiftwidth=2
+set smartindent "オートインデント
+" set cursorline
+" hi clear CursorLine
+" set cursorcolumn
+" hi CursorColumn term=reverse cterm=none ctermbg=195
+
+" "#####検索設定#####
+set ignorecase "大文字/小文字の区別なく検索する
+set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
+set wrapscan "検索時に最後まで行ったら最初に戻る
+set hlsearch "検索結果のハイライト
+" EscEsc でハイライトを消す
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+"クリップボードをWindowsと連携する
+set clipboard+=unnamed
+" set guioptions+=a
+" set clipboard+=autoselect
+"新しい行のインデントを現在行と同じにする
+"set autoindent 
+"タブの代わりに空白文字を指定する
+set expandtab
+set number
+
+" status line
+:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+:set laststatus=2 
+
+" ファイル名補完の強化
+set wildmode=list:longest
+
+set nocompatible
+filetype plugin indent off
+
+" netrwは常にtree view
+let g:netrw_liststyle = 3
+" 'v'でファイルを開くときは右側に開く。(デフォルトが左側なので入れ替え)
+let g:netrw_altv = 1
+" 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
+let g:netrw_alto = 1
+
 if has('unix')
   set guifont=Ricty\ 14
 elseif has('win32')
@@ -78,74 +153,6 @@ NeoBundleCheck
 " End Neobundle Settings.
 "-------------------------
 
-syntax on
-"colorscheme darkblue
-"colorscheme jellybeans
-colorscheme molokai
-"colorscheme badwolf
-
-" 自動的に開いたファイルのディレクトリに移動する
-set autochdir
-
-" ### Windowsのvimで挿入モードのIMEをデフォルトオフにする ###########
-set iminsert=0
-set imsearch=-1
-
-" listcharsで指定した特殊文字を表示する
-set list
-set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:¬
-
-"全角スペースをハイライト表示
-"function! ZenkakuSpace()
-"    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
-"endfunction
-
-"if has('syntax')
-"    augroup ZenkakuSpace
-"        autocmd!
-"        autocmd ColorScheme       * call ZenkakuSpace()
-"        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-"    augroup END
-"    call ZenkakuSpace()
-"endif
-
-set title "編集中のファイル名を表示
-set tabstop=2 "インデントをスペース4つ分に設定
-set shiftwidth=2
-set smartindent "オートインデント
-" set cursorline
-" hi clear CursorLine
-" set cursorcolumn
-" hi CursorColumn term=reverse cterm=none ctermbg=195
-
-" "#####検索設定#####
-set ignorecase "大文字/小文字の区別なく検索する
-set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
-set wrapscan "検索時に最後まで行ったら最初に戻る
-set hlsearch "検索結果のハイライト
-" EscEsc でハイライトを消す
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
-
-"クリップボードをWindowsと連携する
-set clipboard+=unnamed
-" set guioptions+=a
-" set clipboard+=autoselect
-"新しい行のインデントを現在行と同じにする
-"set autoindent 
-"タブの代わりに空白文字を指定する
-set expandtab
-set number
-
-" status line
-:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-:set laststatus=2 
-
-" ファイル名補完の強化
-set wildmode=list:longest
-
-set nocompatible
-filetype plugin indent off
-
 " ### キーバインド
 " # 括弧を入力した時の自動補完
 " http://d.hatena.ne.jp/spiritloose/20061113/1163401194
@@ -170,7 +177,7 @@ vnoremap <expr> [Replace]c ':s ;\<' . expand('<cword>') . '\>;'
 nnoremap    [Tag]   <Nop>
 nmap    t [Tag]
 for n in range(1, 9)
-  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+  execute 'nnoremap <silent> '.n ':<C-u>tabnext'.n.'<CR>'
 endfor
 " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 
