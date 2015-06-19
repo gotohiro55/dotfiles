@@ -30,25 +30,13 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite.vim'
-let g:unite_enable_start_insert=0
-let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
-nnoremap [unite]    <Nop>
-nmap     <Space>u [unite]
-nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
-nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
-" nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
-" nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
-" nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
-
 " NeoBundle 'The-NERD-tree'
 " NeoBundle 'The-NERD-Commenter'
 " NeoBundle 'Gist.vim'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<c-e>'
+NeoBundle 'tpope/vim-fugitive'
 
 "--- colorscheme ---
 NeoBundle 'nanotech/jellybeans.vim'
@@ -67,6 +55,22 @@ NeoBundleCheck
 "-------------------------
 " End Neobundle Settings.
 "-------------------------
+
+"----- Shougo/unite.vim -----
+let g:unite_enable_start_insert=0
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+nnoremap [unite]    <Nop>
+nmap     <Space>u [unite]
+nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
+nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
+" nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
+" nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
+" nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
+
+"----- mattn/emmet-vim -----
+let g:user_emmet_leader_key='<c-e>'
 
 
 
