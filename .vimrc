@@ -179,7 +179,7 @@ vnoremap <expr> [Replace]c ':s ;\<' . expand('<cword>') . '\>;'
 nnoremap    [Tag]   <Nop>
 nmap    t [Tag]
 for n in range(1, 9)
-  execute 'nnoremap <silent> '.n ':<C-u>tabnext'.n.'<CR>'
+  execute 'nnoremap <silent> [Tag]'.n ':<C-u>tabnext'.n.'<CR>'
 endfor
 " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 
