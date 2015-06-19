@@ -155,8 +155,12 @@ let g:netrw_alto = 1
 
 if has('unix')
   set guifont=Ricty\ 14
+elseif has('win64')
+  set guifont=Ricty:h11
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win64.dll'
 elseif has('win32')
   set guifont=Ricty:h11
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win32.dll'
 endif
 
 " ### キーバインド
