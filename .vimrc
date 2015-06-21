@@ -126,10 +126,6 @@ set hlsearch "検索結果のハイライト
 " EscEsc でハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-"クリップボードをWindowsと連携する
-set clipboard+=unnamed
-" set guioptions+=a
-" set clipboard+=autoselect
 "新しい行のインデントを現在行と同じにする
 "set autoindent 
 "タブの代わりに空白文字を指定する
@@ -153,14 +149,24 @@ let g:netrw_altv = 1
 " 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
 let g:netrw_alto = 1
 
+
 if has('unix')
   set guifont=Ricty\ 14
+  set clipboard=unnamedplus
+  ""set guioptions+=a
+  ""set clipboard+=autoselect
 elseif has('win64')
   set guifont=Ricty:h11
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win64.dll'
+
+  "クリップボードをWindowsと連携する
+  set clipboard+=unnamed
 elseif has('win32')
   set guifont=Ricty:h11
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win32.dll'
+
+  "クリップボードをWindowsと連携する
+  set clipboard+=unnamed
 endif
 
 " ### キーバインド
