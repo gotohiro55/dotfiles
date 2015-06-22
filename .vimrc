@@ -177,6 +177,9 @@ vnoremap ( "zdi(<C-R>z)<ESC>
 vnoremap " "zdi"<C-R>z"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
+" Ctrl-p で0番レジスタ(自分でヤンクしたテキスト)をペーストする
+vnoremap <silent> <C-p> "0p<CR>
+
 " カーソル位置の単語を置換する
 nnoremap  [Replace] <Nop>
 nmap      <Space>r  [Replace]
