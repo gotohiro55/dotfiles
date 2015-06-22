@@ -201,13 +201,11 @@ endfor
 " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 
 map [Tag]e :tabe 
-" tc 新しいタブを一番右に作る
-map <silent> [Tag]c :tablast <bar> tabnew<CR>
-" tx タブを閉じる
-map <silent> [Tag]x :tabclose<CR>
-" tn 次のタブ
+map <silent> [Tag]h :tabrewind<CR>
+map <silent> [Tag]l :tablast<CR>
+map <silent> [Tag]o :tabonly<CR>
+map <silent> [Tag]c :tabclose<CR>
 map <silent> <Tab> :tabnext<CR>
-" tp 前のタブ
 map <silent> <S-Tab> :tabprevious<CR>
 
 " 個別のタブの表示設定をします
