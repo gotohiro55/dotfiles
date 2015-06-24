@@ -149,6 +149,9 @@ let g:netrw_altv = 1
 " 'o'でファイルを開くときは下側に開く。(デフォルトが上側なので入れ替え)
 let g:netrw_alto = 1
 
+" バックスペースの動作
+set backspace=indent,eol,start
+
 
 if has('unix')
   set guifont=Ricty\ 14
