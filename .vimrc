@@ -201,10 +201,12 @@ endfor
 " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 
 map [Tag]e :tabe 
+map <silent> [Tag]n :tabnew<CR>
 map <silent> [Tag]h :tabrewind<CR>
 map <silent> [Tag]l :tablast<CR>
 map <silent> [Tag]o :tabonly<CR>
 map <silent> [Tag]c :tabclose<CR>
+map <silent> [Tag]k :tabclose<CR>
 map <silent> <Tab> :tabnext<CR>
 map <silent> <S-Tab> :tabprevious<CR>
 
