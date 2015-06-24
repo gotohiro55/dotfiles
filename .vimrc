@@ -154,7 +154,7 @@ set backspace=indent,eol,start
 
 
 if has('unix')
-  set guifont=Ricty\ 14
+  set guifont=Ricty\ 13
   set clipboard=unnamedplus
   ""set guioptions+=a
   ""set clipboard+=autoselect
