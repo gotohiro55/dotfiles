@@ -5,73 +5,84 @@ set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 "set termencoding=
 
-"---------------------------
-" Start Neobundle Settings.
-"---------------------------
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle/'))
+" 以下の設定はvimのみ有効(viでは無効)
+if 1
+  "---------------------------
+  " Start Neobundle Settings.
+  "---------------------------
+  if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#rc(expand('~/.vim/bundle/'))
+  endif
+
+  call neobundle#begin(expand('~/.vim/bundle/'))
+
+  " Let NeoBundle manage NeoBundle
+  NeoBundleFetch 'Shougo/neobundle.vim'
+
+  " My Bundles here:
+  NeoBundle 'Shougo/vimproc.vim', {
+  \ 'build' : {
+  \     'windows' : 'tools\\update-dll-mingw 64',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make -f make_mac.mak',
+  \     'linux' : 'make',
+  \     'unix' : 'gmake',
+  \    },
+  \ }
+  NeoBundle 'Shougo/neomru.vim'
+  NeoBundle 'Shougo/unite.vim'
+  " NeoBundle 'The-NERD-tree'
+  " NeoBundle 'The-NERD-Commenter'
+  " NeoBundle 'Gist.vim'
+  NeoBundle 'vim-ruby/vim-ruby'
+  NeoBundle 'thinca/vim-qfreplace'
+  NeoBundle 'mattn/emmet-vim'
+  NeoBundle 'tpope/vim-fugitive'
+
+  "--- colorscheme ---
+  NeoBundle 'nanotech/jellybeans.vim'
+  NeoBundle 'tomasr/molokai'
+  NeoBundle 'sjl/badwolf'
+  "--- colorscheme ---
+
+  call neobundle#end()
+
+  filetype plugin indent on
+  filetype indent on
+
+  " インストールのチェック
+  NeoBundleCheck
+
+  "-------------------------
+  " End Neobundle Settings.
+  "-------------------------
+
+  "----- Shougo/unite.vim -----
+  let g:unite_enable_start_insert=0
+  let g:unite_source_history_yank_enable =1
+  let g:unite_source_file_mru_limit = 200
+  nnoremap [unite]    <Nop>
+  nmap     <Space>u [unite]
+  nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
+  nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+  nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
+  " nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
+  " nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
+  " nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
+
+  "----- mattn/emmet-vim -----
+  let g:user_emmet_leader_key='<c-e>'
+
+  "----- colorscheme -----
+  "colorscheme darkblue
+  "colorscheme jellybeans
+  colorscheme molokai
+  "colorscheme badwolf
+
+  " 自動的に開いたファイルのディレクトリに移動する
+  set autochdir
 endif
-
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw 64',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'The-NERD-tree'
-" NeoBundle 'The-NERD-Commenter'
-" NeoBundle 'Gist.vim'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'tpope/vim-fugitive'
-
-"--- colorscheme ---
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'sjl/badwolf'
-"--- colorscheme ---
-
-call neobundle#end()
-
-filetype plugin indent on
-filetype indent on
-
-" インストールのチェック
-NeoBundleCheck
-
-"-------------------------
-" End Neobundle Settings.
-"-------------------------
-
-"----- Shougo/unite.vim -----
-let g:unite_enable_start_insert=0
-let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
-nnoremap [unite]    <Nop>
-nmap     <Space>u [unite]
-nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
-nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
-" nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
-" nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
-" nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
-
-"----- mattn/emmet-vim -----
-let g:user_emmet_leader_key='<c-e>'
-
 
 
 " ツールバーとメニューバーを非表示
@@ -79,13 +90,6 @@ set guioptions-=T
 set guioptions-=m
 
 syntax on
-"colorscheme darkblue
-"colorscheme jellybeans
-colorscheme molokai
-"colorscheme badwolf
-
-" 自動的に開いたファイルのディレクトリに移動する
-set autochdir
 
 " ### Windowsのvimで挿入モードのIMEをデフォルトオフにする ###########
 set iminsert=0
