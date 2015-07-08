@@ -162,6 +162,8 @@ if has('unix')
   set clipboard=unnamedplus
   ""set guioptions+=a
   ""set clipboard+=autoselect
+  set t_ut=
+  set t_Co=256
 elseif has('win64')
   set guifont=Ricty:h11
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win64.dll'
