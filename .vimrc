@@ -297,7 +297,8 @@ function! s:tabpage_label(n)
 
   " カレントバッファ
   let curbufnr = bufnrs[tabpagewinnr(a:n) - 1]  " tabpagewinnr() は 1 origin
-  let fname = pathshorten(bufname(curbufnr))
+  "let fname = pathshorten(bufname(curbufnr))
+  let fname = fnamemodify(bufname(curbufnr), ':t')
 
   let label = no . mod . sp . fname
 
