@@ -177,6 +177,20 @@ elseif has('win32')
 endif
 
 " ### キーバインド
+
+" http://postd.cc/how-to-boost-your-vim-productivity/
+" 1. LeaderをSpaceキーにする
+let mapleader = "\<Space>"
+
+" <Space>wを押してファイルを保存する
+nnoremap <Leader>w :w<CR>
+
+" <Space>hで行頭へ移動
+nnoremap <Leader>h 0
+
+" <Space>lで行頭へ移動
+nnoremap <Leader>l $
+
 " # 括弧を入力した時の自動補完
 " http://d.hatena.ne.jp/spiritloose/20061113/1163401194
 inoremap { {}<LEFT>
@@ -194,10 +208,10 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 vnoremap <silent> <C-p> "0p<CR>
 
 " カーソル位置の単語を置換する
-nnoremap  [Replace] <Nop>
-nmap      <Space>r  [Replace]
-nnoremap <expr> [Replace]c ':%s ;\<' . expand('<cword>') . '\>;'
-vnoremap <expr> [Replace]c ':s ;\<' . expand('<cword>') . '\>;'
+noremap  [Replace] <Nop>
+map      <Space>r  [Replace]
+nnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
+vnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
 
 " ### タブ関連
 nnoremap    [Tag]   <Nop>
