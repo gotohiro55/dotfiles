@@ -138,7 +138,7 @@ set expandtab
 set number
 
 " status line
-:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [ENCODE=%{&fenc}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 :set laststatus=2 
 
 " ファイル名補完の強化
@@ -189,10 +189,10 @@ let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 
 " <Space>hで行頭へ移動
-nnoremap <Leader>h 0
+noremap <Leader>h 0
 
 " <Space>lで行頭へ移動
-nnoremap <Leader>l $
+noremap <Leader>l $
 
 " # 括弧を入力した時の自動補完
 " http://d.hatena.ne.jp/spiritloose/20061113/1163401194
