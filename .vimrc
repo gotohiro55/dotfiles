@@ -138,7 +138,7 @@ set expandtab
 set number
 
 " status line
-:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [ENCODE=%{&fenc}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+:set statusline=%F%m%r%h%w\ [%{&ff}]\ [%{&fenc}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 :set laststatus=2 
 
 " ファイル名補完の強化
