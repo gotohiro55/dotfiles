@@ -1,3 +1,4 @@
+set nocompatible
 set encoding=utf-8
 set fileformat=unix
 set fileformats=unix,dos
@@ -49,7 +50,6 @@ if 1
   call neobundle#end()
 
   filetype plugin indent on
-  filetype indent on
 
   " インストールのチェック
   NeoBundleCheck
@@ -144,8 +144,6 @@ set number
 " ファイル名補完の強化
 set wildmode=list:longest
 
-set nocompatible
-filetype plugin indent off
 
 " netrwは常にtree view
 let g:netrw_liststyle = 3
