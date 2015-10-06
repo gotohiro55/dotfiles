@@ -156,7 +156,11 @@ let g:netrw_alto = 1
 set backspace=indent,eol,start
 
 
-if has('unix')
+if has('mac')
+  set guifont=RictyDiminished-Regular:h13
+  set clipboard=unnamed
+  set clipboard+=autoselect
+elseif has('unix')
   set guifont=Ricty\ 13
   set clipboard=unnamedplus
   ""set guioptions+=a
