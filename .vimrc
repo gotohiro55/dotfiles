@@ -41,6 +41,11 @@ if 1
   NeoBundle 'mattn/emmet-vim'
   NeoBundle 'tpope/vim-fugitive'
 
+  " 選択中にShift-S + "でカッコで囲む
+  NeoBundle 'tpope/vim-surround'
+
+  " indentの深さに色を付ける
+  NeoBundle 'nathanaelkane/vim-indent-guides'
   "--- colorscheme ---
   NeoBundle 'nanotech/jellybeans.vim'
   NeoBundle 'tomasr/molokai'
@@ -80,16 +85,29 @@ if 1
   colorscheme molokai
   "colorscheme badwolf
 
+  "----- nathanaelkane/vim-indent-guides -----
+  "let g:indent_guides_start_level=2
+  "let g:indent_guides_auto_colors=0
+  "let g:indent_guides_enable_on_vim_startup=0
+  "let g:indent_guides_color_change_percent=20
+  "let g:indent_guides_guide_size=1
+  "let g:indent_guides_space_guides=1
+
+  "hi IndentGuidesOdd  ctermbg=235
+  "hi IndentGuidesEven ctermbg=237
+  "au FileType coffee,ruby,javascript,python IndentGuidesEnable
+  "nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+
   " 自動的に開いたファイルのディレクトリに移動する
   set autochdir
 endif
 
+syntax on
 
 " ツールバーとメニューバーを非表示
 set guioptions-=T
 set guioptions-=m
 
-syntax on
 
 " ### Windowsのvimで挿入モードのIMEをデフォルトオフにする ###########
 set iminsert=0
@@ -157,9 +175,11 @@ set backspace=indent,eol,start
 
 
 if has('mac')
-  set guifont=RictyDiminished-Regular:h13
+  set t_ut=
+  set t_Co=256
+  set guifont=RictyDiminished-Regular:h14
   set clipboard=unnamed
-  set clipboard+=autoselect
+  "set clipboard+=autoselect
 elseif has('unix')
   set guifont=Ricty\ 13
   set clipboard=unnamedplus
@@ -189,6 +209,8 @@ let mapleader = "\<Space>"
 
 " <Space>wを押してファイルを保存する
 nnoremap <Leader>w :w<CR>
+" <Space>qを押してファイルを閉じるする
+nnoremap <Leader>q :q<CR>
 
 " <Space>hで行頭へ移動
 noremap <Leader>h 0
@@ -198,16 +220,17 @@ noremap <Leader>l $
 
 " # 括弧を入力した時の自動補完
 " http://d.hatena.ne.jp/spiritloose/20061113/1163401194
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-vnoremap { "zdi{<C-R>z}<ESC>
-vnoremap [ "zdi[<C-R>z]<ESC>
-vnoremap ( "zdi(<C-R>z)<ESC>
-vnoremap " "zdi"<C-R>z"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
+" vim-surroundで代替するようにした
+"inoremap { {}<LEFT>
+"inoremap [ []<LEFT>
+"inoremap ( ()<LEFT>
+"inoremap " ""<LEFT>
+"inoremap ' ''<LEFT>
+"vnoremap { "zdi{<C-R>z}<ESC>
+"vnoremap [ "zdi[<C-R>z]<ESC>
+"vnoremap ( "zdi(<C-R>z)<ESC>
+"vnoremap " "zdi"<C-R>z"<ESC>
+"vnoremap ' "zdi'<C-R>z'<ESC>
 
 " Ctrl-p で0番レジスタ(自分でヤンクしたテキスト)をペーストする
 vnoremap <silent> <C-p> "0p<CR>
