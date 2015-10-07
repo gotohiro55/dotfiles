@@ -5,6 +5,7 @@
 # 無視したくないファイルを以下に指定する
 !/.vimrc
 !/.vim
+!/.tmux.conf
 !/.gitignore
 !/.vim/bundle/neobundle.vim
 
