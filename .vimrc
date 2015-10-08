@@ -210,6 +210,9 @@ endif
 " 1. LeaderをSpaceキーにする
 let mapleader = "\<Space>"
 
+" ビジュアルモード選択した部分を*で検索できる。
+vnoremap * "zy:let @/ = @z<CR>n
+
 " <Space>wを押してファイルを保存する
 nnoremap <Leader>w :w<CR>
 " <Space>qを押してファイルを閉じるする
@@ -223,7 +226,6 @@ noremap <Leader>l $
 
 " # 括弧を入力した時の自動補完
 " http://d.hatena.ne.jp/spiritloose/20061113/1163401194
-" vim-surroundで代替するようにした
 "inoremap { {}<LEFT>
 "inoremap [ []<LEFT>
 "inoremap ( ()<LEFT>
