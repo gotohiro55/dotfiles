@@ -74,7 +74,10 @@ if 1
   nmap     <Space>u [unite]
   nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
   nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+  nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
   nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
+  nnoremap <silent> [unite]u    :<C-u>Unite file_mru buffer<CR>
+  nnoremap <silent> [unite]y    :<C-u>Unite history/yank<CR>
   " nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
   " nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
   " nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
