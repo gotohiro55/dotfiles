@@ -53,6 +53,7 @@ if 1
   NeoBundle 'nanotech/jellybeans.vim'
   NeoBundle 'tomasr/molokai'
   NeoBundle 'sjl/badwolf'
+  NeoBundle 'w0ng/vim-hybrid'
   "--- colorscheme ---
 
   call neobundle#end()
@@ -88,8 +89,9 @@ if 1
   "----- colorscheme -----
   "colorscheme darkblue
   "colorscheme jellybeans
-  colorscheme molokai
+  "colorscheme molokai
   "colorscheme badwolf
+  colorscheme hybrid
 
   "----- nathanaelkane/vim-indent-guides -----
   "let g:indent_guides_start_level=2
