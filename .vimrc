@@ -274,34 +274,36 @@ map <silent> <S-Tab> :tabprevious<CR>
 " ### ウインドウ/ペイン関連
 " Vimの便利な画面分割＆タブページと、それを更に便利にする方法 - Qiita
 " http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca
-nnoremap s <Nop>
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sH <C-w>H
-nnoremap sn gt
-nnoremap sp gT
-nnoremap sr <C-w>r
-nnoremap s= <C-w>=
-nnoremap sw <C-w>w
-nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>=
-nnoremap sN :<C-u>bn<CR>
-nnoremap sP :<C-u>bp<CR>
-nnoremap st :<C-u>tabnew<CR>
-nnoremap sT :<C-u>Unite tab<CR>
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
-nnoremap sq :<C-u>q<CR>
-nnoremap sQ :<C-u>bd<CR>
-call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+nnoremap [Scr]  <Nop>
+nmap     f      [Scr]
+nnoremap [Scr]  <Nop>
+nnoremap [Scr]j <C-w>j
+nnoremap [Scr]k <C-w>k
+nnoremap [Scr]l <C-w>l
+nnoremap [Scr]h <C-w>h
+nnoremap [Scr]J <C-w>J
+nnoremap [Scr]K <C-w>K
+nnoremap [Scr]L <C-w>L
+nnoremap [Scr]H <C-w>H
+nnoremap [Scr]n gt
+nnoremap [Scr]p gT
+nnoremap [Scr]r <C-w>r
+nnoremap [Scr]= <C-w>=
+nnoremap [Scr]w <C-w>w
+nnoremap [Scr]o <C-w>_<C-w>|
+nnoremap [Scr]O <C-w>=
+nnoremap [Scr]N :<C-u>bn<CR>
+nnoremap [Scr]P :<C-u>bp<CR>
+nnoremap [Scr]t :<C-u>tabnew<CR>
+nnoremap [Scr]T :<C-u>Unite tab<CR>
+nnoremap [Scr]s :<C-u>sp<CR><C-w>j
+nnoremap [Scr]v :<C-u>vs<CR><C-w>l
+nnoremap [Scr]q :<C-u>q<CR>
+nnoremap [Scr]Q :<C-u>bd<CR>
+call submode#enter_with('bufmove', 'n', '', 'f>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', 'f<', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', 'f+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', 'f-', '<C-w>-')
 call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
