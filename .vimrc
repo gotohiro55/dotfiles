@@ -301,10 +301,10 @@ nnoremap [Scr]H <C-w>H
 nnoremap [Scr]n gt
 nnoremap [Scr]p gT
 nnoremap [Scr]r <C-w>r
+nnoremap [Scr]- <C-w>_<C-w>|
 nnoremap [Scr]= <C-w>=
 nnoremap [Scr]w <C-w>w
-nnoremap [Scr]o <C-w>_<C-w>|
-nnoremap [Scr]O <C-w>=
+nnoremap [Scr]o <C-w>o
 nnoremap [Scr]N :<C-u>bn<CR>
 nnoremap [Scr]P :<C-u>bp<CR>
 nnoremap [Scr]t :<C-u>tabnew<CR>
