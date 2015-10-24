@@ -141,6 +141,9 @@ set title "編集中のファイル名を表示
 set tabstop=2 "インデントをスペース4つ分に設定
 set shiftwidth=2
 set smartindent "オートインデント
+augroup vimrc
+autocmd! FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4
+augroup END
 " set cursorline
 " hi clear CursorLine
 " set cursorcolumn
