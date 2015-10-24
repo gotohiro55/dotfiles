@@ -73,16 +73,6 @@ if 1
   let g:unite_source_history_yank_enable =1
   let g:unite_source_file_mru_limit = 200
   nnoremap [unite]    <Nop>
-  nmap     <Space>u [unite]
-  nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
-  nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
-  nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
-  nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
-  nnoremap <silent> [unite]u    :<C-u>Unite file_mru buffer<CR>
-  nnoremap <silent> [unite]y    :<C-u>Unite history/yank<CR>
-  " nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
-  " nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
-  " nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
 
   "----- Shougo/vimfiler -----
   let g:vimfiler_as_default_explorer = 1
@@ -100,17 +90,17 @@ if 1
   colorscheme hybrid
 
   "----- nathanaelkane/vim-indent-guides -----
-  "let g:indent_guides_start_level=2
-  "let g:indent_guides_auto_colors=0
-  "let g:indent_guides_enable_on_vim_startup=0
-  "let g:indent_guides_color_change_percent=20
-  "let g:indent_guides_guide_size=1
-  "let g:indent_guides_space_guides=1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_auto_colors=1
+  let g:indent_guides_enable_on_vim_startup=0
+  let g:indent_guides_color_change_percent=20
+  let g:indent_guides_guide_size=1
+  let g:indent_guides_space_guides=1
 
-  "hi IndentGuidesOdd  ctermbg=235
-  "hi IndentGuidesEven ctermbg=237
-  "au FileType coffee,ruby,javascript,python IndentGuidesEnable
-  "nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+  hi IndentGuidesOdd  ctermbg=235
+  hi IndentGuidesEven ctermbg=234
+  au FileType coffee,ruby,javascript,python,yaml IndentGuidesEnable
+  nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
   " 自動的に開いたファイルのディレクトリに移動する
   "set autochdir
@@ -223,6 +213,7 @@ endif
 " http://postd.cc/how-to-boost-your-vim-productivity/
 " 1. LeaderをSpaceキーにする
 let mapleader = "\<Space>"
+"let mapleader = ","
 
 " ビジュアルモード選択した部分を*で検索できる。
 vnoremap * "zy:let @/ = @z<CR>n
@@ -262,8 +253,24 @@ vnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
 
 "----- Shougo/vimfiler -----
 "noremap  <Leader>f <Nop>
-nnoremap <silent> <Leader>ff :VimFilerBufferDir -no-quit<CR>
+nnoremap <silent> <Leader>ff :VimFilerBufferDir -quit<CR>
 nnoremap <silent> <Leader>fv :VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+
+"----- Shougo/unite.vim -----
+let g:unite_enable_start_insert=0
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+nnoremap [unite]    <Nop>
+nmap     <Leader>u [unite]
+nnoremap <silent> [unite]f    :<C-u>Unite file<CR>
+nnoremap <silent> [unite]b    :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]t    :<C-u>Unite tab<CR>
+nnoremap <silent> [unite]m    :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]u    :<C-u>Unite file_mru buffer<CR>
+nnoremap <silent> [unite]y    :<C-u>Unite history/yank<CR>
+" nnoremap <silent> [unite]urc  :<C-u>Unite file_rec/async:app/controllers/ <CR>
+" nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
+" nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
 
 " ### タブ関連
 nnoremap    [Tag]   <Nop>
