@@ -87,6 +87,7 @@ if 1
   "----- Shougo/vimfiler -----
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_safe_mode_by_default = 0
+  "let g:vimfiler_edit_action = 'tabopen'
 
   "----- mattn/emmet-vim -----
   let g:user_emmet_leader_key='<c-e>'
@@ -217,7 +218,7 @@ elseif has('win32')
   set clipboard+=unnamed
 endif
 
-" ### キーバインド
+" === キーバインド ===
 
 " http://postd.cc/how-to-boost-your-vim-productivity/
 " 1. LeaderをSpaceキーにする
@@ -228,7 +229,7 @@ vnoremap * "zy:let @/ = @z<CR>n
 
 " <Space>wを押してファイルを保存する
 nnoremap <Leader>w :w<CR>
-" <Space>qを押してファイルを閉じるする
+" <Space>qを押してファイルを閉じる
 nnoremap <Leader>q :q<CR>
 
 " <Space>hで行頭へ移動
@@ -258,6 +259,11 @@ noremap  [Replace] <Nop>
 map      <Space>r  [Replace]
 nnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
 vnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
+
+"----- Shougo/vimfiler -----
+"noremap  <Leader>f <Nop>
+nnoremap <silent> <Leader>ff :VimFilerBufferDir -no-quit<CR>
+nnoremap <silent> <Leader>fv :VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
 
 " ### タブ関連
 nnoremap    [Tag]   <Nop>
