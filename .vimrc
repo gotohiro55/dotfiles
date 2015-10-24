@@ -33,6 +33,7 @@ if 1
   \ }
   NeoBundle 'Shougo/neomru.vim'
   NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'Shougo/vimfiler'
   " NeoBundle 'The-NERD-tree'
   " NeoBundle 'The-NERD-Commenter'
   " NeoBundle 'Gist.vim'
@@ -83,6 +84,10 @@ if 1
   " nnoremap <silent> [unite]urm  :<C-u>Unite file_rec/async:app/models/ <CR>
   " nnoremap <silent> [unite]urv  :<C-u>Unite file_rec/async:app/views/ <CR>
 
+  "----- Shougo/vimfiler -----
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_safe_mode_by_default = 0
+
   "----- mattn/emmet-vim -----
   let g:user_emmet_leader_key='<c-e>'
 
@@ -107,7 +112,7 @@ if 1
   "nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
   " 自動的に開いたファイルのディレクトリに移動する
-  set autochdir
+  "set autochdir
 endif
 
 syntax on
