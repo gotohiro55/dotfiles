@@ -34,6 +34,8 @@ if 1
   NeoBundle 'Shougo/neomru.vim'
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'Shougo/vimfiler'
+  NeoBundle 'itchyny/lightline.vim'
+
   " NeoBundle 'The-NERD-tree'
   " NeoBundle 'The-NERD-Commenter'
   " NeoBundle 'Gist.vim'
@@ -72,12 +74,73 @@ if 1
   let g:unite_enable_start_insert=0
   let g:unite_source_history_yank_enable =1
   let g:unite_source_file_mru_limit = 200
-  nnoremap [unite]    <Nop>
 
   "----- Shougo/vimfiler -----
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_safe_mode_by_default = 0
   "let g:vimfiler_edit_action = 'tabopen'
+  
+  "----- itchyny/lightline.vim -----
+  let g:lightline = {
+          \ 'colorscheme': 'wombat',
+          \ 'mode_map': {'c': 'NORMAL'},
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+          \ },
+          \ 'component_function': {
+          \   'modified': 'LightLineModified',
+          \   'readonly': 'LightLineReadonly',
+          \   'fugitive': 'LightLineFugitive',
+          \   'filename': 'LightLineFilename',
+          \   'fileformat': 'LightLineFileformat',
+          \   'filetype': 'LightLineFiletype',
+          \   'fileencoding': 'LightLineFileencoding',
+          \   'mode': 'LightLineMode'
+          \ }
+          \ }
+
+  function! LightLineModified()
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+  endfunction
+
+  function! LightLineReadonly()
+    return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+  endfunction
+
+  function! LightLineFilename()
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+          \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+          \  &ft == 'unite' ? unite#get_status_string() :
+          \  &ft == 'vimshell' ? vimshell#get_status_string() :
+          \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+          \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+  endfunction
+
+  function! LightLineFugitive()
+    try
+      if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+        return fugitive#head()
+      endif
+    catch
+    endtry
+    return ''
+  endfunction
+
+  function! LightLineFileformat()
+    return winwidth(0) > 70 ? &fileformat : ''
+  endfunction
+
+  function! LightLineFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+  endfunction
+
+  function! LightLineFileencoding()
+    return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+  endfunction
+
+  function! LightLineMode()
+    return winwidth(0) > 60 ? lightline#mode() : ''
+  endfunction
 
   "----- mattn/emmet-vim -----
   let g:user_emmet_leader_key='<c-e>'
@@ -163,8 +226,30 @@ set expandtab
 set number
 
 " status line
-:set statusline=%F%m%r%h%w\ [%{&ff}]\ [%{&fenc}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 :set laststatus=2 
+" %< - 行が長すぎるときに切り詰める位置
+" %f - ファイル名（相対パス）
+" %F - ファイル名（絶対パス）
+" %t - ファイル名（パス無し)
+"
+" %m - 修正フラグ （[+]または[-]）
+" %r - 読み込み専用フラグ（[RO]）
+" %h - ヘルプバッファ
+" %w - preview window flag
+"
+" %{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'} -
+" fileencodingとfileformatを表示
+"
+" %= - 左寄せと右寄せ項目の区切り（続くアイテムを右寄せにする）
+" %l - 現在のカーソルの行番号
+" %L - 総行数
+" %c - column番号
+" %V - カラム番号
+" %P - カーソルの場所 %表示
+":set statusline=%F%m%r%h%w\ [%{&ff}]\ [%{&fenc}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%<%f\ %m%r%h%w
+"set statusline+=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
+"set statusline+=%=%l/%L,%c%V%8P
 
 " ファイル名補完の強化
 set wildmode=list:longest
@@ -253,7 +338,7 @@ vnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
 
 "----- Shougo/vimfiler -----
 "noremap  <Leader>f <Nop>
-nnoremap <silent> <Leader>ff :VimFilerBufferDir -quit<CR>
+nnoremap <silent> <Leader>ff :VimFilerBufferDir<CR>
 nnoremap <silent> <Leader>fv :VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
 
 "----- Shougo/unite.vim -----
