@@ -76,8 +76,8 @@ if 1
   let g:unite_source_file_mru_limit = 200
 
   "----- Shougo/vimfiler -----
-  let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_safe_mode_by_default = 0
+  "let g:vimfiler_as_default_explorer = 1
   "let g:vimfiler_edit_action = 'tabopen'
   
   "----- itchyny/lightline.vim -----
@@ -90,7 +90,6 @@ if 1
           \ 'component_function': {
           \   'modified': 'LightLineModified',
           \   'readonly': 'LightLineReadonly',
-          \   'fugitive': 'LightLineFugitive',
           \   'filename': 'LightLineFilename',
           \   'fileformat': 'LightLineFileformat',
           \   'filetype': 'LightLineFiletype',
@@ -98,6 +97,9 @@ if 1
           \   'mode': 'LightLineMode'
           \ }
           \ }
+
+  " Gitのブランチ名を出したい場合
+  "       \   'fugitive': 'LightLineFugitive',
 
   function! LightLineModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -112,7 +114,7 @@ if 1
           \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
           \  &ft == 'unite' ? unite#get_status_string() :
           \  &ft == 'vimshell' ? vimshell#get_status_string() :
-          \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+          \ '' != expand('%') ? expand('%') : '[No Name]') .
           \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
   endfunction
 
@@ -151,17 +153,25 @@ if 1
   "colorscheme molokai
   "colorscheme badwolf
   colorscheme hybrid
+  set background=dark
 
   "----- nathanaelkane/vim-indent-guides -----
-  let g:indent_guides_start_level=2
-  let g:indent_guides_auto_colors=1
-  let g:indent_guides_enable_on_vim_startup=0
-  let g:indent_guides_color_change_percent=20
-  let g:indent_guides_guide_size=1
-  let g:indent_guides_space_guides=1
+  "let g:indent_guides_start_level=2
+  "let g:indent_guides_auto_colors=0
+  "let g:indent_guides_enable_on_vim_startup=1
+  "let g:indent_guides_color_change_percent=20
+  "let g:indent_guides_guide_size=1
+  "let g:indent_guides_space_guides=1
 
-  hi IndentGuidesOdd  ctermbg=235
-  hi IndentGuidesEven ctermbg=234
+  "hi IndentGuidesOdd  ctermbg=235
+  "hi IndentGuidesEven ctermbg=235
+  let g:indent_guides_enable_on_vim_startup=1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_auto_colors=0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+  let g:indent_guides_color_change_percent = 30
+  let g:indent_guides_guide_size = 1
   au FileType coffee,ruby,javascript,python,yaml IndentGuidesEnable
   nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
@@ -169,7 +179,7 @@ if 1
   "set autochdir
 endif
 
-syntax on
+syntax enable
 
 " ツールバーとメニューバーを非表示
 set guioptions-=T
@@ -339,7 +349,9 @@ vnoremap <expr> [Replace]c ':%s ;' . expand('<cword>') . ';'
 "----- Shougo/vimfiler -----
 "noremap  <Leader>f <Nop>
 nnoremap <silent> <Leader>ff :VimFilerBufferDir<CR>
-nnoremap <silent> <Leader>fv :VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+"nnoremap <silent> <Leader>fv :VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+nnoremap <silent> <Leader>fv :VimFilerBufferDir -split<CR>
+nnoremap <silent> <Leader>ft :VimFilerBufferDir -tab<CR>
 
 "----- Shougo/unite.vim -----
 let g:unite_enable_start_insert=0
