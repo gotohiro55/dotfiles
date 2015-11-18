@@ -1,0 +1,4 @@
+source-file ~/.tmux/window.1
+source-file ~/.tmux/window.2
+source-file ~/.tmux/window.3
+
