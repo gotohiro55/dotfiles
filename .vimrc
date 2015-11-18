@@ -57,6 +57,7 @@ if 1
   NeoBundle 'tomasr/molokai'
   NeoBundle 'sjl/badwolf'
   NeoBundle 'w0ng/vim-hybrid'
+  NeoBundle 'noahfrederick/vim-hemisu'
   "--- colorscheme ---
 
   call neobundle#end()
@@ -149,11 +150,13 @@ if 1
 
   "----- colorscheme -----
   "colorscheme darkblue
-  "colorscheme jellybeans
+  colorscheme jellybeans
   "colorscheme molokai
   "colorscheme badwolf
-  colorscheme hybrid
+  "colorscheme hybrid
+  "colorscheme hemisu
   set background=dark
+  "set background=light
 
   "----- nathanaelkane/vim-indent-guides -----
   "let g:indent_guides_start_level=2
