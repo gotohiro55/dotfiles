@@ -217,6 +217,7 @@ set shiftwidth=2
 set smartindent "オートインデント
 augroup vimrc
 autocmd! FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd! FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4
 augroup END
 " set cursorline
 " hi clear CursorLine
