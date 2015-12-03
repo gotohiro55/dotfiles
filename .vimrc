@@ -219,7 +219,8 @@ augroup vimrc
 autocmd! FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd! FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4
 augroup END
-" set cursorline
+"set cursorline
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " hi clear CursorLine
 " set cursorcolumn
 " hi CursorColumn term=reverse cterm=none ctermbg=195
@@ -327,6 +328,9 @@ noremap <Leader>h 0
 
 " <Space>lで行頭へ移動
 noremap <Leader>l $
+
+" <Space>cでカーソルラインのON/OFF
+noremap <Leader>c :setlocal cursorline!<CR>
 
 " # 括弧を入力した時の自動補完
 " http://d.hatena.ne.jp/spiritloose/20061113/1163401194
