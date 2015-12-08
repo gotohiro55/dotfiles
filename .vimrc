@@ -36,6 +36,9 @@ if 1
   NeoBundle 'Shougo/vimfiler'
   NeoBundle 'itchyny/lightline.vim'
 
+  " Ctrl+p で Sublime っぽいファイル検索
+  NeoBundle 'ctrlpvim/ctrlp.vim'
+
   " NeoBundle 'The-NERD-tree'
   " NeoBundle 'The-NERD-Commenter'
   " NeoBundle 'Gist.vim'
@@ -287,6 +290,7 @@ if has('mac')
   set guifont=RictyDiminished-Regular:h14
   set clipboard=unnamed
   "set clipboard+=autoselect
+  set mouse=a
 elseif has('unix')
   set guifont=Ricty\ 13
   set clipboard=unnamedplus
