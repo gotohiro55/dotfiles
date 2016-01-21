@@ -6,6 +6,11 @@ set fileencoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 "set termencoding=
 
+" SwapファイルとBackupファイルを作らない
+set nowritebackup
+set nobackup
+set noswapfile
+
 " 以下の設定はvimのみ有効(viでは無効)
 if 1
   "---------------------------
@@ -191,14 +196,21 @@ syntax enable
 set guioptions-=T
 set guioptions-=m
 
-
 " ### Windowsのvimで挿入モードのIMEをデフォルトオフにする ###########
 set iminsert=0
 set imsearch=-1
 
-" listcharsで指定した特殊文字を表示する
-set list
-set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:¬
+" ### 表示関係
+set expandtab       " タブの代わりに空白文字を指定する
+set number          " 行番号の表示
+set wrap            " 長いテキストの折り返し
+set textwidth=0     " 自動的に改行が入るのを無効化
+set colorcolumn=80  " その代わり80文字目にラインを入れる
+set list            " listcharsで指定した特殊文字を表示する
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+" スクリーンベルを無効化
+set t_vb=
+set novisualbell
 
 "全角スペースをハイライト表示
 "function! ZenkakuSpace()
@@ -214,10 +226,14 @@ set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:¬
 "    call ZenkakuSpace()
 "endif
 
-set title "編集中のファイル名を表示
-set tabstop=2 "インデントをスペース4つ分に設定
+set title                       " 編集中のファイル名を表示
+set tabstop=2                   " インデントをスペース4つ分に設定
 set shiftwidth=2
-set smartindent "オートインデント
+set smartindent                 " オートインデント
+set shiftround                  " '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
+set virtualedit=all             " カーソルを文字が存在しない部分でも動けるようにする
+set showmatch                   " 対応する括弧などをハイライト表示する
+set matchpairs& matchpairs+=<:> " 対応括弧に'<'と'>'のペアを追加
 augroup vimrc
 autocmd! FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd! FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4
@@ -236,12 +252,6 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 set hlsearch "検索結果のハイライト
 " EscEsc でハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
-
-"新しい行のインデントを現在行と同じにする
-"set autoindent 
-"タブの代わりに空白文字を指定する
-set expandtab
-set number
 
 " status line
 :set laststatus=2 
@@ -349,8 +359,8 @@ noremap <Leader>c :setlocal cursorline!<CR>
 "vnoremap " "zdi"<C-R>z"<ESC>
 "vnoremap ' "zdi'<C-R>z'<ESC>
 
-" Ctrl-p で0番レジスタ(自分でヤンクしたテキスト)をペーストする
-vnoremap <silent> <C-p> "0p<CR>
+" 0番レジスタ(自分でヤンクしたテキスト)をペーストする
+vnoremap <silent> <Leader>p "0p<CR>
 
 " カーソル位置の単語を置換する
 noremap  [Replace] <Nop>
