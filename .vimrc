@@ -1,4 +1,6 @@
-set nocompatible
+if &compatible
+  set nocompatible
+endif
 set encoding=utf-8
 set fileformat=unix
 set fileformats=unix,dos
@@ -59,6 +61,19 @@ if 1
   NeoBundle 'nathanaelkane/vim-indent-guides'
   " ペインのサイズ変更で使う
   NeoBundle 'kana/vim-submode'
+
+  " Ruby, Rails 用
+  " http://qiita.com/alpaca_taichou/items/ab2ad83ddbaf2f6ce7fb
+  NeoBundle 'edsono/vim-matchit'
+  " http://qiita.com/yuku_t/items/0ac33cea18e10f14e185
+  NeoBundle 'scrooloose/syntastic'
+
+  "--- Glench/Vim-Jinja2-Syntax
+  "--- Jinja2のシンタックスハイライト
+  NeoBundle 'Glench/Vim-Jinja2-Syntax'
+
+  "デフォルトのyamlのシンタックスハイライトが重いので
+  NeoBundle 'stephpy/vim-yaml'
 
   "--- colorscheme ---
   NeoBundle 'nanotech/jellybeans.vim'
@@ -156,6 +171,10 @@ if 1
   "----- mattn/emmet-vim -----
   let g:user_emmet_leader_key='<c-e>'
 
+  "----- 'scrooloose/syntastic' -----
+  let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby'] }
+  let g:syntastic_ruby_checkers = ['rubocop']
+
   "----- colorscheme -----
   "colorscheme darkblue
   colorscheme jellybeans
@@ -163,7 +182,7 @@ if 1
   "colorscheme badwolf
   "colorscheme hybrid
   "colorscheme hemisu
-  set background=dark
+  "set background=dark
   "set background=light
 
   "----- nathanaelkane/vim-indent-guides -----
@@ -176,15 +195,15 @@ if 1
 
   "hi IndentGuidesOdd  ctermbg=235
   "hi IndentGuidesEven ctermbg=235
-  let g:indent_guides_enable_on_vim_startup=1
-  let g:indent_guides_start_level=2
-  let g:indent_guides_auto_colors=0
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
-  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
-  let g:indent_guides_color_change_percent = 30
-  let g:indent_guides_guide_size = 1
-  au FileType coffee,ruby,javascript,python,yaml IndentGuidesEnable
-  nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+  "let g:indent_guides_enable_on_vim_startup=1
+  "let g:indent_guides_start_level=2
+  "let g:indent_guides_auto_colors=0
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
+  "let g:indent_guides_color_change_percent = 30
+  "let g:indent_guides_guide_size = 1
+  "au FileType coffee,ruby,javascript,python,yaml IndentGuidesEnable
+  "nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
   " 自動的に開いたファイルのディレクトリに移動する
   "set autochdir
@@ -232,8 +251,8 @@ set shiftwidth=2
 set smartindent                 " オートインデント
 set shiftround                  " '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
 set virtualedit=all             " カーソルを文字が存在しない部分でも動けるようにする
-set showmatch                   " 対応する括弧などをハイライト表示する
-set matchpairs& matchpairs+=<:> " 対応括弧に'<'と'>'のペアを追加
+"set showmatch                   " 対応する括弧などをハイライト表示する
+"set matchpairs& matchpairs+=<:> " 対応括弧に'<'と'>'のペアを追加
 augroup vimrc
 autocmd! FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd! FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4
