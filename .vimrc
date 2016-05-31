@@ -13,86 +13,45 @@ set nowritebackup
 set nobackup
 set noswapfile
 
+let g:rc_dir = expand('~/.vim/rc')
+
 " 以下の設定はvimのみ有効(viでは無効)
 if 1
-  "---------------------------
-  " Start Neobundle Settings.
-  "---------------------------
-  if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#rc(expand('~/.vim/bundle/'))
+  let s:dein_dir = expand('~/.vim/dein')
+  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+  " dein.vim がなければ github から落としてくる
+  if &runtimepath !~# '/dein.vim'
+    if !isdirectory(s:dein_repo_dir)
+      execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    endif
+    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
   endif
 
-  call neobundle#begin(expand('~/.vim/bundle/'))
+  " 設定開始
+  if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
 
-  " Let NeoBundle manage NeoBundle
-  NeoBundleFetch 'Shougo/neobundle.vim'
+    " プラグインリストを収めた TOML ファイル
+    let s:toml      = g:rc_dir . '/dein.toml'
+    let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-  " My Bundles here:
-  NeoBundle 'Shougo/vimproc.vim', {
-  \ 'build' : {
-  \     'windows' : 'tools\\update-dll-mingw 64',
-  \     'cygwin' : 'make -f make_cygwin.mak',
-  \     'mac' : 'make -f make_mac.mak',
-  \     'linux' : 'make',
-  \     'unix' : 'gmake',
-  \    },
-  \ }
-  NeoBundle 'Shougo/neomru.vim'
-  NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'Shougo/vimfiler'
-  NeoBundle 'itchyny/lightline.vim'
+    " TOML を読み込み、キャッシュしておく
+    call dein#load_toml(s:toml,      {'lazy': 0})
+    call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  " Ctrl+p で Sublime っぽいファイル検索
-  NeoBundle 'ctrlpvim/ctrlp.vim'
+    " 設定終了
+    call dein#end()
+    call dein#save_state()
+  endif
 
-  " NeoBundle 'The-NERD-tree'
-  " NeoBundle 'The-NERD-Commenter'
-  " NeoBundle 'Gist.vim'
-  NeoBundle 'vim-ruby/vim-ruby'
-  NeoBundle 'thinca/vim-qfreplace'
-  NeoBundle 'mattn/emmet-vim'
-  NeoBundle 'tpope/vim-fugitive'
+  " もし、未インストールものものがあったらインストール
+  if dein#check_install()
+    call dein#install()
+  endif
 
-  " 選択中にShift-S + "でカッコで囲む
-  NeoBundle 'tpope/vim-surround'
-
-  " indentの深さに色を付ける
-  NeoBundle 'nathanaelkane/vim-indent-guides'
-  " ペインのサイズ変更で使う
-  NeoBundle 'kana/vim-submode'
-
-  " Ruby, Rails 用
-  " http://qiita.com/alpaca_taichou/items/ab2ad83ddbaf2f6ce7fb
-  NeoBundle 'edsono/vim-matchit'
-  " http://qiita.com/yuku_t/items/0ac33cea18e10f14e185
-  NeoBundle 'scrooloose/syntastic'
-
-  "--- Glench/Vim-Jinja2-Syntax
-  "--- Jinja2のシンタックスハイライト
-  NeoBundle 'Glench/Vim-Jinja2-Syntax'
-
-  "デフォルトのyamlのシンタックスハイライトが重いので
-  NeoBundle 'stephpy/vim-yaml'
-
-  "--- colorscheme ---
-  NeoBundle 'nanotech/jellybeans.vim'
-  NeoBundle 'tomasr/molokai'
-  NeoBundle 'sjl/badwolf'
-  NeoBundle 'w0ng/vim-hybrid'
-  NeoBundle 'noahfrederick/vim-hemisu'
-  "--- colorscheme ---
-
-  call neobundle#end()
 
   filetype plugin indent on
-
-  " インストールのチェック
-  NeoBundleCheck
-
-  "-------------------------
-  " End Neobundle Settings.
-  "-------------------------
 
   "----- Shougo/unite.vim -----
   let g:unite_enable_start_insert=0
@@ -104,6 +63,17 @@ if 1
   "let g:vimfiler_as_default_explorer = 1
   "let g:vimfiler_edit_action = 'tabopen'
   
+  "----- Shougo/neocomplete.vim -----
+  "if dein#tap('neocomplete')
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_ignore_case = 1
+    let g:neocomplete#enable_smart_case = 1
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns._ = '\h\w*'
+  "endif
+
   "----- itchyny/lightline.vim -----
   let g:lightline = {
           \ 'colorscheme': 'wombat',
@@ -186,24 +156,24 @@ if 1
   "set background=light
 
   "----- nathanaelkane/vim-indent-guides -----
-  "let g:indent_guides_start_level=2
-  "let g:indent_guides_auto_colors=0
-  "let g:indent_guides_enable_on_vim_startup=1
-  "let g:indent_guides_color_change_percent=20
-  "let g:indent_guides_guide_size=1
-  "let g:indent_guides_space_guides=1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_auto_colors=0
+  let g:indent_guides_enable_on_vim_startup=1
+  let g:indent_guides_color_change_percent=20
+  let g:indent_guides_guide_size=1
+  let g:indent_guides_space_guides=1
 
-  "hi IndentGuidesOdd  ctermbg=235
-  "hi IndentGuidesEven ctermbg=235
-  "let g:indent_guides_enable_on_vim_startup=1
-  "let g:indent_guides_start_level=2
-  "let g:indent_guides_auto_colors=0
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
-  "let g:indent_guides_color_change_percent = 30
-  "let g:indent_guides_guide_size = 1
-  "au FileType coffee,ruby,javascript,python,yaml IndentGuidesEnable
-  "nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+  hi IndentGuidesOdd  ctermbg=235
+  hi IndentGuidesEven ctermbg=235
+  let g:indent_guides_enable_on_vim_startup=1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_auto_colors=0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
+  let g:indent_guides_color_change_percent = 30
+  let g:indent_guides_guide_size = 1
+  au FileType coffee,ruby,javascript,python,yaml IndentGuidesEnable
+  nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
   " 自動的に開いたファイルのディレクトリに移動する
   "set autochdir

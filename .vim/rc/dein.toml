@@ -1,0 +1,94 @@
+# 基本は github.com のレポジトリーを指定するだけ
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# git clone 後、実行すべきコマンドがある場合はこんな感じ
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+#if   = '''has('lua')'''
+
+#[[plugins]]
+#repo = 'Shougo/neosnippet'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+
+[[plugins]]
+repo = 'thinca/vim-qfreplace'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+# 選択中にShift-S + "でカッコで囲む
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+# indentの深さに色を付ける
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+
+# ペインのサイズ変更で使う
+[[plugins]]
+repo = 'kana/vim-submode'
+
+# http://qiita.com/yuku_t/items/0ac33cea18e10f14e185
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+#--- Jinja2のシンタックスハイライト
+[[plugins]]
+repo = 'Glench/Vim-Jinja2-Syntax'
+
+# デフォルトのyamlのシンタックスハイライトが重いので
+[[plugins]]
+repo = 'stephpy/vim-yaml'
+
+#--- colorscheme ---
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'sjl/badwolf'
+
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'noahfrederick/vim-hemisu'
+
