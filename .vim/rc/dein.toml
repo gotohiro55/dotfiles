@@ -76,6 +76,10 @@ repo = 'Glench/Vim-Jinja2-Syntax'
 [[plugins]]
 repo = 'stephpy/vim-yaml'
 
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+
 #--- colorscheme ---
 [[plugins]]
 repo = 'nanotech/jellybeans.vim'
@@ -91,4 +95,7 @@ repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'noahfrederick/vim-hemisu'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
 
